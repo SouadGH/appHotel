@@ -1,0 +1,111 @@
+<ion-header translucent="true" no-border>
+  <ion-toolbar color="primary">
+     <ion-buttons slot="start">
+        <ion-back-button defaultHref="connexion"></ion-back-button>
+      </ion-buttons>
+      <div id="headerContainer">
+          <div id="logoIbis"></div>
+          <div id="headerTitle">Femmes de chambre</div>
+          <div id="logoMigros"></div>    
+      </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header>
+      Femmes de chambres
+    </ion-list-header>
+    <ion-item *ngFor="let femme of ListFM;let k=index; ">
+        <ion-avatar slot="start" [hidden]="(exist_image(femme.code)=='false') ? true:false"
+      >
+            <img    src="../../assets/images/none.jpg" />  
+       <!--    <img
+          src="(exist_image(femme.code)) ? {{path_base}}{{femme.code}}.jpg : ../../assets/images/none.jpg" 
+          />
+          <img *ngIf="(!exist_image(femme.code))" 
+            src="../../assets/images/none.jpg" /> 
+       <img *ngIf="(exist_image(femme.code))" 
+                src='{{path_base}}{{femme.code}}.jpg' />   -->
+       
+            
+            
+          <!--  src='{{path_base}}{{femme.code}}.jpg' 
+              <img src="../../assets/images/none.jpg" >
+         <ion-col col-6 *ngFor="let cin of photos_downloaded; let id= index">
+                <ion-card class="block">
+                  <img [src]=photos_downloaded[id] *ngIf="cin" />
+                </ion-card>
+              </ion-col>-->
+          </ion-avatar>
+
+          <ion-avatar slot="start"  [hidden]="(exist_image(femme.code)=='true') ? true:false"  >
+              <img src='{{path_base}}{{femme.code}}.jpg'  /> 
+          </ion-avatar> 
+    <!--      <ion-avatar slot="start" *ngIf="exist_image(femme.code)">           
+            <img src="../../assets/images/none.jpg">           
+          </ion-avatar>-->
+
+
+
+    <!--   <ion-avatar item-start>
+        <img src="../../assets/fdm/fdm{{femme.id_FM}}.png">
+      </ion-avatar>-->
+
+      <ion-label> {{femme.nom + ' ' + femme.prenom}} </ion-label>
+
+    <!--  <ion-toggle value='femme.presence' color="success" checked="false" (ionChange)='notify(femme,$event)'>  </ion-toggle>-->
+          <ion-toggle           
+          value={{femme.id_FM}} 
+         color="success"
+         checked={{femme.presence}}
+          (ionChange)='notify(femme,$event)'
+         ></ion-toggle>
+     
+
+    </ion-item>
+  </ion-list>
+  <ion-item>
+      <ion-label position="floating">Max chambre :</ion-label>
+      <ion-input   type="number" [(ngModel)]="maxChambre" (ionChange)="Dispatch()" name="maxChambre" ></ion-input>
+    </ion-item>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Statistiques</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/images/sale2.jpg">
+      </ion-avatar>
+      <ion-label>Chambres sales :</ion-label>
+      <h4>{{ NbrRoomsFreeDirty + NbrRoomsOccupiedDirty}}</h4>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/images/ok.jpg">
+      </ion-avatar>
+      <ion-label>Chambres à faire :</ion-label>
+      <h4>{{ (NbrRoomsFreeDirty + NbrRoomsOccupiedDirty) - chambresAbloquer }}</h4>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/images/cross.png">
+      </ion-avatar>
+      <ion-label>Chambres à bloquer :</ion-label>
+      <h4>{{chambresAbloquer}}</h4>
+    </ion-item>
+  </ion-list>
+
+ <!-- <ion-button disabled={{shouldHide}} shape="round" (click)="GoPlanning()">Générer le planning</ion-button>    
+  <ion-button disabled={{!shouldHide}} shape="round" (click)="ShowPlanning()">Voir Chambres</ion-button>-->
+  <ion-button   shape="round" (click)="ShowPlanning()">Voir Chambres</ion-button>
+  <ion-button  [hidden]="shouldHideupdate"   disabled={{shouldHide}} shape="round" (click)="GoPlanning()" >Générer le planning</ion-button>
+  <ion-button  [hidden]="!shouldHideupdate"  disabled={{!shouldHide}} shape="round" (click)="GoPlanningUpdate()" >Update le planning</ion-button>
+<!--  <ion-button shape="round" (click)="GoPlanningUpdate()" >Update le planning</ion-button>-->
+  <ion-button  [hidden]="!shouldHideupdate"  shape="round" (click)="GoConsult()" >Consulter</ion-button>
+  <ion-button  [hidden]="!shouldHideupdate"         disabled={{shoulddisabledAnnuler}} shape="round" (click)="GoAnnuler()" >Annuler</ion-button>
+  <ion-button  shape="round" (click)="GoGestionFDC()" >Gestion des FDC</ion-button>
+
+
+</ion-content>

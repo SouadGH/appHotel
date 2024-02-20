@@ -1,0 +1,43 @@
+.add-icon{
+      
+    font-size:25px;
+   // margin-top:-1em;
+}
+.propre{
+    background-color:  #52b640;
+}
+.sale{
+    background-color:#ff0000;
+}
+.occupee{
+    background-color: #ffff80;
+}
+.hs{
+    background-color: rgb(127, 127, 127);
+}
+
+#headerContainer
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#logoIbis{
+    height: 50px;
+    width: 50px;
+    background: url('../../assets/images/Ibis_Styles_logo_2012.png') center no-repeat;
+    background-size: contain;
+}
+
+#headerTitlte{
+
+}
+
+#logoMigros{
+    height: 50px;
+    width: 70px;
+    background: url('../../assets/images/ibis-403.png') center no-repeat; 
+    background-size: contain;
+}

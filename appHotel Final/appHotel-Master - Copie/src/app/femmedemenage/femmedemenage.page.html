@@ -1,0 +1,427 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="connecte/acceuil"></ion-back-button>
+    </ion-buttons>
+    <div id="headerContainer">
+      <div id="logoIbis"></div>
+      <div id="headerTitle">États des chambres</div>
+      <div id="logoMigros"></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-item-divider>
+        <ion-button slot="start" shape="round"  (click)="loadOptionsRoomPage()">Options Room Page
+        </ion-button>
+        <ion-button slot="end" shape="round" (click)="rafraichirDonnees()">
+          <ion-icon icon-only name="sync" ></ion-icon>
+          Rafraîchir
+        </ion-button>
+      </ion-item-divider>
+    </ion-row>
+    <ion-row>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>2ème étage</ion-label>
+        </ion-item-divider>
+
+        <ion-button *ngFor="let chambre of Etage2" (click)="presentActionSheet(chambre)" [color]="
+              (chambre.Etat == 'LIB-Prp' || 
+               chambre.Etat == 'LIB-Prp-Checked' ||                 
+               chambre.Etat == 'LIB-Prp-Priority' ||
+               chambre.Etat == 'LIB-Prp-Priority-Checked' ||
+               chambre.Etat == 'LIB-Prp-ISSUE' ||
+               chambre.Etat == 'LIB-Prp-ISSUE-Checked' ||
+               chambre.Etat == 'LIB-Prp-ISSUE-Priority' ||
+               chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+
+               chambre.Etat == 'OCC-Prp' || 
+               chambre.Etat == 'OCC-Prp-Checked' ||
+               chambre.Etat == 'OCC-Prp-ISSUE'||
+               chambre.Etat == 'OCC-Prp-ISSUE-Checked' ||
+               chambre.Etat == 'OCC-Prp-Priority' ||
+               chambre.Etat == 'OCC-Prp-Priority-Checked' ||
+               chambre.Etat == 'OCC-Prp-ISSUE-Priority' ||
+               chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked ') ? 'success' :  
+               
+              (chambre.Etat == 'LIB-Sal' ||
+               chambre.Etat == 'LIB-Sal-Checked' ||
+               chambre.Etat == 'LIB-Sal-Priority' ||
+               chambre.Etat == 'LIB-Sal-Priority-Checked' ||
+               chambre.Etat == 'LIB-Sal-ISSUE' ||
+               chambre.Etat == 'LIB-Sal-ISSUE-Checked' ||
+               chambre.Etat == 'LIB-Sal-ISSUE-Priority' ||
+               chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked') ? 'danger' : 
+
+              (chambre.Etat == 'OCC-Sal' ||
+               chambre.Etat == 'OCC-Sal-Checked' ||
+               chambre.Etat == 'OCC-Sal-Priority' ||
+               chambre.Etat == 'OCC-Sal-Priority-Checked' ||
+               chambre.Etat == 'OCC-Sal-ISSUE' ||
+               chambre.Etat == 'OCC-Sal-ISSUE-Checked' ||
+               chambre.Etat == 'OCC-Sal-ISSUE-Priority' ||
+               chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked') ? 'warning' : 
+
+              'medium'" [ngClass]="
+                 chambre.Etat == 'LIB-Prp-ISSUE' ||
+                 chambre.Etat == 'LIB-Prp-ISSUE-Checked' || 
+                 chambre.Etat == 'OCC-Prp-ISSUE' ||
+                 chambre.Etat == 'OCC-Prp-ISSUE-Checked' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE-Checked' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE-Checked' ||
+
+                 chambre.Etat == 'LIB-Prp-ISSUE-Priority' ||
+                 chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                 chambre.Etat == 'OCC-Prp-ISSUE-Priority' ||
+                 chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE-Priority' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE-Priority' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked' ||
+
+                 chambre.Etat == 'HS-Sal-ISSUE' ||
+                 chambre.Etat == 'HS-Sal-ISSUE-Checked' ||
+                 chambre.Etat == 'HS-Sal-ISSUE-Priority' ||
+                 chambre.Etat == 'HS-Sal-ISSUE-Priority-Checked' ? 'pulse-button' : 'secondary'
+                ">
+          {{chambre.room_num}}
+
+          <ion-icon *ngIf="
+                        chambre.Etat == 'LIB-Prp-Priority' ||
+                        chambre.Etat == 'OCC-Prp-Priority'  ||
+                        chambre.Etat == 'LIB-Sal-Priority' ||
+                        chambre.Etat == 'OCC-Sal-Priority'||
+
+                        chambre.Etat == 'HS-Sal-Priority' || 
+                        chambre.Etat == 'HS-Sal-ISSUE-Priority' ||
+
+                        chambre.Etat == 'LIB-Prp-ISSUE-Priority' ||
+                        chambre.Etat == 'OCC-Prp-ISSUE-Priority' ||
+                        chambre.Etat == 'LIB-Sal-ISSUE-Priority' ||
+                        chambre.Etat == 'OCC-Sal-ISSUE-Priority' ||
+
+                        chambre.Etat == 'HS-Sal-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Prp-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Prp-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Sal-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Sal-Priority-Checked' ||
+
+                        chambre.Etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked'
+                        " name="star"></ion-icon>
+
+
+          <ion-icon *ngIf="
+          chambre.Etat == 'LIB-Prp-Checked' ||
+          chambre.Etat == 'OCC-Prp-Checked'  ||
+          chambre.Etat == 'LIB-Sal-Checked' ||
+          chambre.Etat == 'OCC-Sal-Checked' ||
+          chambre.Etat == 'HS-Sal-Checked' || 
+
+          chambre.Etat == 'HS-Sal-Priority-Checked' ||
+          chambre.Etat == 'LIB-Prp-Priority-Checked' ||
+          chambre.Etat == 'OCC-Prp-Priority-Checked' ||
+          chambre.Etat == 'LIB-Sal-Priority-Checked' ||
+          chambre.Etat == 'OCC-Sal-Priority-Checked' ||
+
+          chambre.Etat == 'HS-Sal-ISSUE-Checked' ||
+          chambre.Etat == 'LIB-Prp-ISSUE-Checked' ||
+          chambre.Etat == 'OCC-Prp-ISSUE-Checked' ||
+          chambre.Etat == 'LIB-Sal-ISSUE-Checked' ||
+          chambre.Etat == 'OCC-Sal-ISSUE-Checked' ||
+
+          chambre.Etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked'
+          " name="done-all"></ion-icon>
+
+        </ion-button>
+      </ion-item-group>
+    </ion-row>
+
+    <ion-row>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>3ème étage</ion-label>
+        </ion-item-divider>
+
+        <ion-button *ngFor="let chambre of Etage3" (click)="presentActionSheet(chambre)" [color]="
+              (chambre.Etat == 'LIB-Prp' || 
+               chambre.Etat == 'LIB-Prp-Checked' ||                 
+               chambre.Etat == 'LIB-Prp-Priority' ||
+               chambre.Etat == 'LIB-Prp-Priority-Checked' ||
+               chambre.Etat == 'LIB-Prp-ISSUE' ||
+               chambre.Etat == 'LIB-Prp-ISSUE-Checked' ||
+               chambre.Etat == 'LIB-Prp-ISSUE-Priority' ||
+               chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+
+               chambre.Etat == 'OCC-Prp' || 
+               chambre.Etat == 'OCC-Prp-Checked' ||
+               chambre.Etat == 'OCC-Prp-ISSUE'||
+               chambre.Etat == 'OCC-Prp-ISSUE-Checked' ||
+               chambre.Etat == 'OCC-Prp-Priority' ||
+               chambre.Etat == 'OCC-Prp-Priority-Checked' ||
+               chambre.Etat == 'OCC-Prp-ISSUE-Priority' ||
+               chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked ') ? 'success' :  
+               
+              (chambre.Etat == 'LIB-Sal' ||
+               chambre.Etat == 'LIB-Sal-Checked' ||
+               chambre.Etat == 'LIB-Sal-Priority' ||
+               chambre.Etat == 'LIB-Sal-Priority-Checked' ||
+               chambre.Etat == 'LIB-Sal-ISSUE' ||
+               chambre.Etat == 'LIB-Sal-ISSUE-Checked' ||
+               chambre.Etat == 'LIB-Sal-ISSUE-Priority' ||
+               chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked') ? 'danger' : 
+
+              (chambre.Etat == 'OCC-Sal' ||
+               chambre.Etat == 'OCC-Sal-Checked' ||
+               chambre.Etat == 'OCC-Sal-Priority' ||
+               chambre.Etat == 'OCC-Sal-Priority-Checked' ||
+               chambre.Etat == 'OCC-Sal-ISSUE' ||
+               chambre.Etat == 'OCC-Sal-ISSUE-Checked' ||
+               chambre.Etat == 'OCC-Sal-ISSUE-Priority' ||
+               chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked') ? 'warning' : 
+
+              'medium'" [ngClass]="
+                 chambre.Etat == 'LIB-Prp-ISSUE' ||
+                 chambre.Etat == 'LIB-Prp-ISSUE-Checked' || 
+                 chambre.Etat == 'OCC-Prp-ISSUE' ||
+                 chambre.Etat == 'OCC-Prp-ISSUE-Checked' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE-Checked' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE-Checked' ||
+
+                 chambre.Etat == 'LIB-Prp-ISSUE-Priority' ||
+                 chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                 chambre.Etat == 'OCC-Prp-ISSUE-Priority' ||
+                 chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE-Priority' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE-Priority' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked' ||
+
+                 chambre.Etat == 'HS-Sal-ISSUE' ||
+                 chambre.Etat == 'HS-Sal-ISSUE-Checked' ||
+                 chambre.Etat == 'HS-Sal-ISSUE-Priority' ||
+                 chambre.Etat == 'HS-Sal-ISSUE-Priority-Checked' ? 'pulse-button' : 'secondary'
+                ">
+          {{chambre.room_num}}
+
+          <ion-icon *ngIf="
+                        chambre.Etat == 'LIB-Prp-Priority' ||
+                        chambre.Etat == 'OCC-Prp-Priority'  ||
+                        chambre.Etat == 'LIB-Sal-Priority' ||
+                        chambre.Etat == 'OCC-Sal-Priority'||
+
+                        chambre.Etat == 'HS-Sal-Priority' || 
+                        chambre.Etat == 'HS-Sal-ISSUE-Priority' ||
+
+                        chambre.Etat == 'LIB-Prp-ISSUE-Priority' ||
+                        chambre.Etat == 'OCC-Prp-ISSUE-Priority' ||
+                        chambre.Etat == 'LIB-Sal-ISSUE-Priority' ||
+                        chambre.Etat == 'OCC-Sal-ISSUE-Priority' ||
+
+                        chambre.Etat == 'HS-Sal-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Prp-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Prp-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Sal-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Sal-Priority-Checked' ||
+
+                        chambre.Etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked'
+                        " name="star"></ion-icon>
+
+
+          <ion-icon *ngIf="
+          chambre.Etat == 'LIB-Prp-Checked' ||
+          chambre.Etat == 'OCC-Prp-Checked'  ||
+          chambre.Etat == 'LIB-Sal-Checked' ||
+          chambre.Etat == 'OCC-Sal-Checked' ||
+          chambre.Etat == 'HS-Sal-Checked' || 
+
+          chambre.Etat == 'HS-Sal-Priority-Checked' ||
+          chambre.Etat == 'LIB-Prp-Priority-Checked' ||
+          chambre.Etat == 'OCC-Prp-Priority-Checked' ||
+          chambre.Etat == 'LIB-Sal-Priority-Checked' ||
+          chambre.Etat == 'OCC-Sal-Priority-Checked' ||
+
+          chambre.Etat == 'HS-Sal-ISSUE-Checked' ||
+          chambre.Etat == 'LIB-Prp-ISSUE-Checked' ||
+          chambre.Etat == 'OCC-Prp-ISSUE-Checked' ||
+          chambre.Etat == 'LIB-Sal-ISSUE-Checked' ||
+          chambre.Etat == 'OCC-Sal-ISSUE-Checked' ||
+
+          chambre.Etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked'
+          " name="done-all"></ion-icon>
+        </ion-button>
+      </ion-item-group>
+    </ion-row>
+
+    <ion-row>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>4ème étage</ion-label>
+        </ion-item-divider>
+
+        <ion-button *ngFor="let chambre of Etage4" (click)="presentActionSheet(chambre)" [color]="
+              (chambre.Etat == 'LIB-Prp' || 
+               chambre.Etat == 'LIB-Prp-Checked' ||                 
+               chambre.Etat == 'LIB-Prp-Priority' ||
+               chambre.Etat == 'LIB-Prp-Priority-Checked' ||
+               chambre.Etat == 'LIB-Prp-ISSUE' ||
+               chambre.Etat == 'LIB-Prp-ISSUE-Checked' ||
+               chambre.Etat == 'LIB-Prp-ISSUE-Priority' ||
+               chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+
+               chambre.Etat == 'OCC-Prp' || 
+               chambre.Etat == 'OCC-Prp-Checked' ||
+               chambre.Etat == 'OCC-Prp-ISSUE'||
+               chambre.Etat == 'OCC-Prp-ISSUE-Checked' ||
+               chambre.Etat == 'OCC-Prp-Priority' ||
+               chambre.Etat == 'OCC-Prp-Priority-Checked' ||
+               chambre.Etat == 'OCC-Prp-ISSUE-Priority' ||
+               chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked ') ? 'success' :  
+               
+              (chambre.Etat == 'LIB-Sal' ||
+               chambre.Etat == 'LIB-Sal-Checked' ||
+               chambre.Etat == 'LIB-Sal-Priority' ||
+               chambre.Etat == 'LIB-Sal-Priority-Checked' ||
+               chambre.Etat == 'LIB-Sal-ISSUE' ||
+               chambre.Etat == 'LIB-Sal-ISSUE-Checked' ||
+               chambre.Etat == 'LIB-Sal-ISSUE-Priority' ||
+               chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked') ? 'danger' : 
+
+              (chambre.Etat == 'OCC-Sal' ||
+               chambre.Etat == 'OCC-Sal-Checked' ||
+               chambre.Etat == 'OCC-Sal-Priority' ||
+               chambre.Etat == 'OCC-Sal-Priority-Checked' ||
+               chambre.Etat == 'OCC-Sal-ISSUE' ||
+               chambre.Etat == 'OCC-Sal-ISSUE-Checked' ||
+               chambre.Etat == 'OCC-Sal-ISSUE-Priority' ||
+               chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked') ? 'warning' : 
+
+              'medium'" [ngClass]="
+                 chambre.Etat == 'LIB-Prp-ISSUE' ||
+                 chambre.Etat == 'LIB-Prp-ISSUE-Checked' || 
+                 chambre.Etat == 'OCC-Prp-ISSUE' ||
+                 chambre.Etat == 'OCC-Prp-ISSUE-Checked' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE-Checked' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE-Checked' ||
+
+                 chambre.Etat == 'LIB-Prp-ISSUE-Priority' ||
+                 chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                 chambre.Etat == 'OCC-Prp-ISSUE-Priority' ||
+                 chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE-Priority' ||
+                 chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE-Priority' ||
+                 chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked' ||
+
+                 chambre.Etat == 'HS-Sal-ISSUE' ||
+                 chambre.Etat == 'HS-Sal-ISSUE-Checked' ||
+                 chambre.Etat == 'HS-Sal-ISSUE-Priority' ||
+                 chambre.Etat == 'HS-Sal-ISSUE-Priority-Checked' ? 'pulse-button' : 'secondary'
+                ">
+          {{chambre.room_num}}
+
+          <ion-icon *ngIf="
+                        chambre.Etat == 'LIB-Prp-Priority' ||
+                        chambre.Etat == 'OCC-Prp-Priority'  ||
+                        chambre.Etat == 'LIB-Sal-Priority' ||
+                        chambre.Etat == 'OCC-Sal-Priority'||
+
+                        chambre.Etat == 'HS-Sal-Priority' || 
+                        chambre.Etat == 'HS-Sal-ISSUE-Priority' ||
+
+                        chambre.Etat == 'LIB-Prp-ISSUE-Priority' ||
+                        chambre.Etat == 'OCC-Prp-ISSUE-Priority' ||
+                        chambre.Etat == 'LIB-Sal-ISSUE-Priority' ||
+                        chambre.Etat == 'OCC-Sal-ISSUE-Priority' ||
+
+                        chambre.Etat == 'HS-Sal-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Prp-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Prp-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Sal-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Sal-Priority-Checked' ||
+
+                        chambre.Etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                        chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked'
+                        " name="star"></ion-icon>
+
+
+          <ion-icon *ngIf="
+          chambre.Etat == 'LIB-Prp-Checked' ||
+          chambre.Etat == 'OCC-Prp-Checked'  ||
+          chambre.Etat == 'LIB-Sal-Checked' ||
+          chambre.Etat == 'OCC-Sal-Checked' ||
+          chambre.Etat == 'HS-Sal-Checked' || 
+
+          chambre.Etat == 'HS-Sal-Priority-Checked' ||
+          chambre.Etat == 'LIB-Prp-Priority-Checked' ||
+          chambre.Etat == 'OCC-Prp-Priority-Checked' ||
+          chambre.Etat == 'LIB-Sal-Priority-Checked' ||
+          chambre.Etat == 'OCC-Sal-Priority-Checked' ||
+
+          chambre.Etat == 'HS-Sal-ISSUE-Checked' ||
+          chambre.Etat == 'LIB-Prp-ISSUE-Checked' ||
+          chambre.Etat == 'OCC-Prp-ISSUE-Checked' ||
+          chambre.Etat == 'LIB-Sal-ISSUE-Checked' ||
+          chambre.Etat == 'OCC-Sal-ISSUE-Checked' ||
+
+          chambre.Etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+          chambre.Etat == 'OCC-Sal-ISSUE-Priority-Checked'
+          " name="done-all"></ion-icon>
+        </ion-button>
+      </ion-item-group>
+    </ion-row>
+
+  </ion-grid>
+
+  <!-- Affichage du graphique globale-->
+  <ion-card>
+    <ion-card-header style="color: red;text-align: center;">
+      Répartition globale
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+<!--
+  <ion-footer>
+    <ion-toolbar>
+      <ion-button slot="end" shape="round" (click)="rafraichirDonnees()">
+        <ion-icon icon-only name="sync" ></ion-icon>
+        Rafraîchir
+      </ion-button>
+    </ion-toolbar>
+  </ion-footer>
+-->
+</ion-content>

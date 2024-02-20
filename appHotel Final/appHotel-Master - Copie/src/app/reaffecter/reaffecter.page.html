@@ -1,0 +1,368 @@
+<!--<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Dispatch des Chambres
+    </ion-title>
+  </ion-toolbar>
+</ion-header>-->
+
+<ion-header translucent="true" no-border>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="connecte/dispatch" *ngIf="utilisateur.is_gouvernante"></ion-back-button>
+     
+   </ion-buttons>
+
+   <div id="headerContainer">
+      <div id="logoIbis"></div>
+      <div id="headerTitle">Réaffectation des chambres</div>
+      <div id="logoMigros"></div>    
+  </div>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content forceOverscroll="false">
+
+
+  <ion-grid>
+    
+    <ion-grid>
+        <div class="q-header">Chambres non attribuées</div>
+          <ion-row *ngFor="let sector of roomsNotAffected;let i=index;">
+                  <ion-item-group dragula="bag" [(dragulaModel)]="sector.rooms" lines="none">
+                    <ion-button *ngFor="let item of sector.rooms" 
+                    [color]="
+                    (item.etat == 'LIB-Prp' || 
+                     item.etat == 'LIB-Prp-Checked' ||                 
+                     item.etat == 'LIB-Prp-Priority' ||
+                     item.etat == 'LIB-Prp-Priority-Checked' ||
+                     item.etat == 'LIB-Prp-ISSUE' ||
+                     item.etat == 'LIB-Prp-ISSUE-Checked' ||
+                     item.etat == 'LIB-Prp-ISSUE-Priority' ||
+                     item.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+      
+                     item.etat == 'OCC-Prp' || 
+                     item.etat == 'OCC-Prp-Checked' ||
+                     item.etat == 'OCC-Prp-ISSUE'||
+                     item.etat == 'OCC-Prp-ISSUE-Checked' ||
+                     item.etat == 'OCC-Prp-Priority' ||
+                     item.etat == 'OCC-Prp-Priority-Checked' ||
+                     item.etat == 'OCC-Prp-ISSUE-Priority' ||
+                     item.etat == 'OCC-Prp-ISSUE-Priority-Checked ') ? 'success' :  
+                     
+                    (item.etat == 'LIB-Sal' ||
+                     item.etat == 'LIB-Sal-Checked' ||
+                     item.etat == 'LIB-Sal-Priority' ||
+                     item.etat == 'LIB-Sal-Priority-Checked' ||
+                     item.etat == 'LIB-Sal-ISSUE' ||
+                     item.etat == 'LIB-Sal-ISSUE-Checked' ||
+                     item.etat == 'LIB-Sal-ISSUE-Priority' ||
+                     item.etat == 'LIB-Sal-ISSUE-Priority-Checked') ? 'danger' : 
+      
+                    (item.etat == 'OCC-Sal' ||
+                     item.etat == 'OCC-Sal-Checked' ||
+                     item.etat == 'OCC-Sal-Priority' ||
+                     item.etat == 'OCC-Sal-Priority-Checked' ||
+                     item.etat == 'OCC-Sal-ISSUE' ||
+                     item.etat == 'OCC-Sal-ISSUE-Checked' ||
+                     item.etat == 'OCC-Sal-ISSUE-Priority' ||
+                     item.etat == 'OCC-Sal-ISSUE-Priority-Checked') ? 'warning' : 
+      
+                    'medium'"
+      
+            [ngClass]="
+                       item.etat == 'LIB-Prp-ISSUE' ||
+                       item.etat == 'LIB-Prp-ISSUE-Checked' || 
+                       item.etat == 'OCC-Prp-ISSUE' ||
+                       item.etat == 'OCC-Prp-ISSUE-Checked' ||
+                       item.etat == 'LIB-Sal-ISSUE' ||
+                       item.etat == 'LIB-Sal-ISSUE-Checked' ||
+                       item.etat == 'OCC-Sal-ISSUE' ||
+                       item.etat == 'OCC-Sal-ISSUE-Checked' ||
+      
+                       item.etat == 'LIB-Prp-ISSUE-Priority' ||
+                       item.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                       item.etat == 'OCC-Prp-ISSUE-Priority' ||
+                       item.etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                       item.etat == 'LIB-Sal-ISSUE-Priority' ||
+                       item.etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                       item.etat == 'OCC-Sal-ISSUE-Priority' ||
+                       item.etat == 'OCC-Sal-ISSUE-Priority-Checked' ||
+      
+                       item.etat == 'HS-Sal-ISSUE' ||
+                       item.etat == 'HS-Sal-ISSUE-Checked' ||
+                       item.etat == 'HS-Sal-ISSUE-Priority' ||
+                       item.etat == 'HS-Sal-ISSUE-Priority-Checked' ? 'pulse-button' : 'secondary'
+                      "         
+                    >
+                      {{ item.room_num }}
+                      <ion-icon *ngIf="
+                      item.etat == 'LIB-Prp-Priority' ||
+                      item.etat == 'OCC-Prp-Priority'  ||
+                      item.etat == 'LIB-Sal-Priority' ||
+                      item.etat == 'OCC-Sal-Priority'||
+      
+                      item.etat == 'HS-Sal-Priority' || 
+                      item.etat == 'HS-Sal-ISSUE-Priority' ||
+      
+                      item.etat == 'LIB-Prp-ISSUE-Priority' ||
+                      item.etat == 'OCC-Prp-ISSUE-Priority' ||
+                      item.etat == 'LIB-Sal-ISSUE-Priority' ||
+                      item.etat == 'OCC-Sal-ISSUE-Priority' ||
+      
+                      item.etat == 'HS-Sal-Priority-Checked' ||
+                      item.etat == 'LIB-Prp-Priority-Checked' ||
+                      item.etat == 'OCC-Prp-Priority-Checked' ||
+                      item.etat == 'LIB-Sal-Priority-Checked' ||
+                      item.etat == 'OCC-Sal-Priority-Checked' ||
+      
+                      item.etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+                      item.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                      item.etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                      item.etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                      item.etat == 'OCC-Sal-ISSUE-Priority-Checked'
+                      "        
+                name="star"></ion-icon>
+      
+      
+        <ion-icon *ngIf="
+        item.etat == 'LIB-Prp-Checked' ||
+        item.etat == 'OCC-Prp-Checked'  ||
+        item.etat == 'LIB-Sal-Checked' ||
+        item.etat == 'OCC-Sal-Checked' ||
+        item.etat == 'HS-Sal-Checked' || 
+      
+        item.etat == 'HS-Sal-Priority-Checked' ||
+        item.etat == 'LIB-Prp-Priority-Checked' ||
+        item.etat == 'OCC-Prp-Priority-Checked' ||
+        item.etat == 'LIB-Sal-Priority-Checked' ||
+        item.etat == 'OCC-Sal-Priority-Checked' ||
+      
+        item.etat == 'HS-Sal-ISSUE-Checked' ||
+        item.etat == 'LIB-Prp-ISSUE-Checked' ||
+        item.etat == 'OCC-Prp-ISSUE-Checked' ||
+        item.etat == 'LIB-Sal-ISSUE-Checked' ||
+        item.etat == 'OCC-Sal-ISSUE-Checked' ||
+      
+        item.etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+        item.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+        item.etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+        item.etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+        item.etat == 'OCC-Sal-ISSUE-Priority-Checked'
+        "        
+          name="done-all"></ion-icon>
+                    </ion-button>
+                  </ion-item-group>
+          </ion-row>
+          
+    </ion-grid>
+  
+  
+    <ion-row *ngFor="let sector of roomsBySector;let i=index;">
+        <ion-col size="6" class="q2">
+            <div class="q-header">{{sector.femmeMenage.nom}} {{sector.femmeMenage.prenom}}</div>
+            <ion-item-group dragula="bag" [(dragulaModel)]="sector.rooms" lines="none">
+              <ion-button *ngFor="let item of sector.rooms"   
+              [color]="
+              (item.etat == 'LIB-Prp' || 
+               item.etat == 'LIB-Prp-Checked' ||                 
+               item.etat == 'LIB-Prp-Priority' ||
+               item.etat == 'LIB-Prp-Priority-Checked' ||
+               item.etat == 'LIB-Prp-ISSUE' ||
+               item.etat == 'LIB-Prp-ISSUE-Checked' ||
+               item.etat == 'LIB-Prp-ISSUE-Priority' ||
+               item.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+
+               item.etat == 'OCC-Prp' || 
+               item.etat == 'OCC-Prp-Checked' ||
+               item.etat == 'OCC-Prp-ISSUE'||
+               item.etat == 'OCC-Prp-ISSUE-Checked' ||
+               item.etat == 'OCC-Prp-Priority' ||
+               item.etat == 'OCC-Prp-Priority-Checked' ||
+               item.etat == 'OCC-Prp-ISSUE-Priority' ||
+               item.etat == 'OCC-Prp-ISSUE-Priority-Checked ') ? 'success' :  
+               
+              (item.etat == 'LIB-Sal' ||
+               item.etat == 'LIB-Sal-Checked' ||
+               item.etat == 'LIB-Sal-Priority' ||
+               item.etat == 'LIB-Sal-Priority-Checked' ||
+               item.etat == 'LIB-Sal-ISSUE' ||
+               item.etat == 'LIB-Sal-ISSUE-Checked' ||
+               item.etat == 'LIB-Sal-ISSUE-Priority' ||
+               item.etat == 'LIB-Sal-ISSUE-Priority-Checked') ? 'danger' : 
+
+              (item.etat == 'OCC-Sal' ||
+               item.etat == 'OCC-Sal-Checked' ||
+               item.etat == 'OCC-Sal-Priority' ||
+               item.etat == 'OCC-Sal-Priority-Checked' ||
+               item.etat == 'OCC-Sal-ISSUE' ||
+               item.etat == 'OCC-Sal-ISSUE-Checked' ||
+               item.etat == 'OCC-Sal-ISSUE-Priority' ||
+               item.etat == 'OCC-Sal-ISSUE-Priority-Checked') ? 'warning' : 
+
+              'medium'"
+
+      [ngClass]="
+                 item.etat == 'LIB-Prp-ISSUE' ||
+                 item.etat == 'LIB-Prp-ISSUE-Checked' || 
+                 item.etat == 'OCC-Prp-ISSUE' ||
+                 item.etat == 'OCC-Prp-ISSUE-Checked' ||
+                 item.etat == 'LIB-Sal-ISSUE' ||
+                 item.etat == 'LIB-Sal-ISSUE-Checked' ||
+                 item.etat == 'OCC-Sal-ISSUE' ||
+                 item.etat == 'OCC-Sal-ISSUE-Checked' ||
+
+                 item.etat == 'LIB-Prp-ISSUE-Priority' ||
+                 item.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                 item.etat == 'OCC-Prp-ISSUE-Priority' ||
+                 item.etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                 item.etat == 'LIB-Sal-ISSUE-Priority' ||
+                 item.etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                 item.etat == 'OCC-Sal-ISSUE-Priority' ||
+                 item.etat == 'OCC-Sal-ISSUE-Priority-Checked' ||
+
+                 item.etat == 'HS-Sal-ISSUE' ||
+                 item.etat == 'HS-Sal-ISSUE-Checked' ||
+                 item.etat == 'HS-Sal-ISSUE-Priority' ||
+                 item.etat == 'HS-Sal-ISSUE-Priority-Checked' ? 'pulse-button' : 'secondary'
+                "         
+              >
+                {{ item.room_num }}
+                <ion-icon *ngIf="
+                item.etat == 'LIB-Prp-Priority' ||
+                item.etat == 'OCC-Prp-Priority'  ||
+                item.etat == 'LIB-Sal-Priority' ||
+                item.etat == 'OCC-Sal-Priority'||
+
+                item.etat == 'HS-Sal-Priority' || 
+                item.etat == 'HS-Sal-ISSUE-Priority' ||
+
+                item.etat == 'LIB-Prp-ISSUE-Priority' ||
+                item.etat == 'OCC-Prp-ISSUE-Priority' ||
+                item.etat == 'LIB-Sal-ISSUE-Priority' ||
+                item.etat == 'OCC-Sal-ISSUE-Priority' ||
+
+                item.etat == 'HS-Sal-Priority-Checked' ||
+                item.etat == 'LIB-Prp-Priority-Checked' ||
+                item.etat == 'OCC-Prp-Priority-Checked' ||
+                item.etat == 'LIB-Sal-Priority-Checked' ||
+                item.etat == 'OCC-Sal-Priority-Checked' ||
+
+                item.etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+                item.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                item.etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                item.etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                item.etat == 'OCC-Sal-ISSUE-Priority-Checked'
+                "        
+          name="star"></ion-icon>
+
+
+  <ion-icon *ngIf="
+  item.etat == 'LIB-Prp-Checked' ||
+  item.etat == 'OCC-Prp-Checked'  ||
+  item.etat == 'LIB-Sal-Checked' ||
+  item.etat == 'OCC-Sal-Checked' ||
+  item.etat == 'HS-Sal-Checked' || 
+
+  item.etat == 'HS-Sal-Priority-Checked' ||
+  item.etat == 'LIB-Prp-Priority-Checked' ||
+  item.etat == 'OCC-Prp-Priority-Checked' ||
+  item.etat == 'LIB-Sal-Priority-Checked' ||
+  item.etat == 'OCC-Sal-Priority-Checked' ||
+
+  item.etat == 'HS-Sal-ISSUE-Checked' ||
+  item.etat == 'LIB-Prp-ISSUE-Checked' ||
+  item.etat == 'OCC-Prp-ISSUE-Checked' ||
+  item.etat == 'LIB-Sal-ISSUE-Checked' ||
+  item.etat == 'OCC-Sal-ISSUE-Checked' ||
+
+  item.etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+  item.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+  item.etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+  item.etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+  item.etat == 'OCC-Sal-ISSUE-Priority-Checked'
+  "        
+    name="done-all"></ion-icon>
+              </ion-button>
+            </ion-item-group>
+          </ion-col>
+    </ion-row>
+  
+  
+    <ion-row no-padding class="matrix">
+      
+    <!--
+      <ion-col size="6" *ngFor="let femme of allRoomsByFM;let i=index;" class="q1">
+        <div class="q-header">{{femme.prenom}} {{femme.nom}}</div>
+        <ion-item-group dragula="bag"   lines="none" [(dragulaModel)]="getRoomsAffected(femme.id_FM)"  >
+
+            <ion-button  *ngFor="let chambre of q55 "              
+                  id="notification-button"
+                  [color]="(chambre.Etat =='LIB-Prp') ? 'success' :  (chambre.Etat =='LIB-Sal') ? 'danger' : 
+                                          (chambre.Etat =='OCC-Sal') ? 'warning' :    (chambre.Etat =='OCC-Prp') ? 'success' :'medium'"
+                 > {{chambre.room_num}}
+          </ion-button>
+
+        </ion-item-group>
+      </ion-col>
+    -->
+    
+    <!-- comment recuper les donnnees modifier sans avoir une variable dans le fichier typescript????
+      <ion-col size="6" *ngFor="let femme of ListFM;let i=index;" class="q1">
+          <div class="q-header">{{femme.prenom}} {{femme.nom}}</div>
+          <ion-item-group dragula="bag"   lines="none" [(dragulaModel)]="getRoomsAffected(femme.id_FM)"  >
+  
+              <ion-button  *ngFor="let chambre of q55 "              
+                    id="notification-button"
+                    [color]="(chambre.Etat =='LIB-Prp') ? 'success' :  (chambre.Etat =='LIB-Sal') ? 'danger' : 
+                                            (chambre.Etat =='OCC-Sal') ? 'warning' :    (chambre.Etat =='OCC-Prp') ? 'success' :'medium'"
+                   > {{chambre.room_num}}
+            </ion-button>
+  
+          </ion-item-group>
+        </ion-col>
+      -->
+    
+    <!--  
+      <ion-col size="6" class="q2">
+        <div class="q-header">Loren</div>
+        <ion-item-group dragula="bag" [(dragulaModel)]="q2" lines="none">
+          <ion-button *ngFor="let item of q2" [color]="item.color" >
+            {{ item.value }}
+          </ion-button>
+        </ion-item-group>
+      </ion-col>
+ 
+      <ion-col size="6" class="q3">
+        <div class="q-header">Melania</div>
+        <ion-item-group dragula="bag" [(dragulaModel)]="q3" lines="none">
+          <ion-button *ngFor="let item of q3" [color]="item.color" >
+            {{ item.value }}
+          </ion-button>
+        </ion-item-group>
+      </ion-col>
+ 
+      <ion-col size="6" class="q4">
+        <div class="q-header">Brigitte</div>
+        <ion-item-group dragula="bag" [(dragulaModel)]="q4" lines="none">
+          <ion-button *ngFor="let item of q4" [color]="item.color">
+            {{ item.value }}
+          </ion-button>
+        </ion-item-group>
+      </ion-col>
+    -->
+  
+
+    </ion-row>
+  </ion-grid>
+ 
+  <ion-row class="delete-area" align-items-center justify-content-center>
+    <ion-button (click)=" Reaffecter()">Sauvegarder
+      <ion-icon slot="start" name="jet"></ion-icon>
+    </ion-button>
+  </ion-row>
+ 
+</ion-content>

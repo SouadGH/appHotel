@@ -1,0 +1,5 @@
+Room_num,"HXXType","ResidentOrGuest","Etat","lign_date","PassedNights","RemainingNights","StayStatus","RoomStatusAfterH12","Floor_label", "Floor_id,"LinkSp"
+100, "H00", "Resident", "LIB-Prp", "-", "-", "-", "-", "Libre",1, "1000000001", 0 
+110, "H00", "Guest", "LIB-Prp", "-", "-", "-", "-", "Libre", 1, "1000000001", 0
+208, "H00", "Guest", "LIB-Prp", "-", "-", "-", "-", "Libre", 2, "1000000001", 0
+305, "H00", "Resident", "LIB-Prp", "-", "-", "-", "-", "Libre", 3, "1000000001", 0

@@ -1,0 +1,65 @@
+.add-icon{
+      
+    font-size:25px;
+   // margin-top:-1em;
+}
+.propre{
+    background-color:  #52b640;
+}
+.sale{
+    background-color:#ff0000;
+}
+.occupee{
+    background-color: #ffff80;
+}
+.hs{
+    background-color: rgb(127, 127, 127);
+}
+
+#headerContainer
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#logoIbis{
+    height: 50px;
+    width: 50px;
+    background: url('../../assets/images/Ibis_Styles_logo_2012.png') center no-repeat;
+    background-size: contain;
+}
+
+#logoMigros{
+    height: 50px;
+    width: 70px;
+    background: url('../../assets/images/ibis-403.png') center no-repeat; 
+    background-size: contain;
+}
+
+
+.pulse-button{
+    border: none;
+    box-shadow: 0 0 0 0 rgb(250, 23, 2);
+    border-radius: 50%;
+    color:black;
+    cursor: pointer;
+    -webkit-animation: pulse 0.7s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 0.7s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 0.7s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 0.7s infinite cubic-bezier(0.66, 0, 0, 1);
+
+    //--background: url('../../assets/icon/exclamation.png') contain;
+  }
+  .pulse-button:hover 
+  {
+    -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
+  }
+  
+  @-webkit-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(241, 26, 6, 0);}}
+  @-moz-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(241, 26, 6, 0);}}
+  @-ms-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(241, 26, 6, 0);}}
+  @keyframes pulse {to {box-shadow: 0 0 0 15px rgba(241, 26, 6, 0);}}
+
+

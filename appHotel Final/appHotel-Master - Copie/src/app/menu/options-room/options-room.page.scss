@@ -1,0 +1,25 @@
+#headerContainer
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#logoIbis{
+    height: 50px;
+    width: 50px;
+    background: url('../../../assets/images/Ibis_Styles_logo_2012.png') center no-repeat;
+    background-size: contain;
+}
+
+#headerTitle{
+
+}
+
+#logoMigros{
+    height: 50px;
+    width: 70px;
+    background: url('../../../assets/images/ibis-403.png') center no-repeat; 
+    background-size: contain;
+}

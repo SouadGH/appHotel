@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="connecte/planning"></ion-back-button>
+    </ion-buttons>
+    <div id="headerContainer">
+      <div id="logoIbis"></div>
+      <div id="headerTitle">Etats chambres</div>
+      <div id="logoMigros"></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item-divider>
+    <ion-button slot="end" shape="round" (click)="rafraichir()">
+      <ion-icon icon-only name="sync"></ion-icon>
+      Rafraîchir
+    </ion-button>
+  </ion-item-divider>
+
+  <ion-grid>
+    <ion-row>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>2ème étage</ion-label>
+        </ion-item-divider>
+
+        <ion-button *ngFor="let chambre of Etage2" (click)="presentActionSheet(chambre)">
+          {{chambre.room_num}}
+        </ion-button>
+      </ion-item-group>
+    </ion-row>
+
+    <ion-row>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>3ème étage</ion-label>
+        </ion-item-divider>
+
+        <ion-button *ngFor="let chambre of Etage3" (click)="presentActionSheet(chambre)">
+          {{chambre.room_num}}
+        </ion-button>
+      </ion-item-group>
+    </ion-row>
+
+    <ion-row>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>4ème étage</ion-label>
+        </ion-item-divider>
+
+        <ion-button *ngFor="let chambre of Etage4" (click)="presentActionSheet(chambre)">
+          {{chambre.room_num}}
+        </ion-button>
+      </ion-item-group>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

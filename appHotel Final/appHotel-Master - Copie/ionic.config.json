@@ -1,0 +1,8 @@
+{
+  "name": "appHotel",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "8ee166be"
+}

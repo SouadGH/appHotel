@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Liste des options : chambre {{chambre.room_num}}</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="chambre.is_litBebe == true">
+      <img class="imgOptionRoom" src="../../../assets/icon/baby_bed.png">
+      <span> Lit bébé</span>
+      <ion-icon name="remove-circle" (click)="MiseALitBebe(chambre.room_num, chambre.is_litBebe)"></ion-icon>
+    </ion-row>
+    <hr>
+    <ion-row *ngIf="chambre.is_porteOuverte == true">
+      <img class="imgOptionRoom" src="../../../assets/icon/door-opened.png">
+      <span>Porte ouverte</span>
+      <ion-icon name="remove-circle" (click)="MiseAPorteOuverte(chambre.room_num, chambre.is_canapeOuvert)"></ion-icon>
+    </ion-row>
+    <hr>
+    <ion-row *ngIf="chambre.is_porteFermee == true">
+      <img class="imgOptionRoom" src="../../../assets/icon/door_closed.ico">
+      <span>Porte fermée</span>
+      <ion-icon name="remove-circle" (click)="MiseAPorteFermee(chambre.room_num, chambre.is_porteFermee)"></ion-icon>
+    </ion-row>
+    <hr>
+    <ion-row *ngIf="chambre.is_canapeOuvert == true">
+      <img class="imgOptionRoom" src="../../../assets/icon/couch_open.png">
+      <span>Canapé ouvert</span>
+      <ion-icon name="remove-circle" (click)="MiseACanapeOuvert(chambre.room_num, chambre.is_canapeOuvert)"></ion-icon>
+    </ion-row>
+    <hr>
+    <ion-row *ngIf="chambre.is_canapeFerme == true">
+      <img class="imgOptionRoom" src="../../../assets/icon/couch_closed.png">
+      <span>Canapé fermé</span>
+      <ion-icon name="remove-circle" (click)="MiseACanapeFerme(chambre.room_num, chambre.is_canapeFerme)"></ion-icon>
+    </ion-row>
+    <hr>
+    <ion-row *ngIf="chambre.is_litItalienne == true">
+      <img class="imgOptionRoom" src="../../../assets/icon/italian_bed.jpg">
+      <span>Lit à l'italienne</span>
+      <ion-icon name="remove-circle" (click)="MiseALitItalienne(chambre.room_num, chambre.is_litItalienne)"></ion-icon>
+    </ion-row>
+    <hr>
+    <ion-row *ngIf="chambre.is_cadeauChocolat == true">
+      <img class="imgOptionRoom" src="../../../assets/icon/chocolate.png">
+      <span>Cadeau chocolat</span>
+      <ion-icon name="remove-circle" (click)="MiseACadeauChocolat(chambre.room_num, chambre.is_cadeauChocolat)"></ion-icon>
+    </ion-row>
+    <hr>
+    <ion-row *ngIf="chambre.is_cadeauChampagne == true">
+      <img class="imgOptionRoom" src="../../../assets/icon/champagne.png">
+      <span>Cadeau champagne</span>
+      <ion-icon name="remove-circle" (click)="MiseACadeauChampagne(chambre.room_num, chambre.is_cadeauChampagne)"></ion-icon>
+    </ion-row>
+    <hr>
+    <ion-row *ngIf="chambre.is_cadeauFleur == true">
+      <img class="imgOptionRoom" src="../../../assets/icon/fleurs.png">
+      <span>Cadeau fleurs</span>
+      <ion-icon name="remove-circle" (click)="MiseACadeauFleur(chambre.room_num, chambre.is_cadeauFleur)"></ion-icon>
+    </ion-row>
+    <hr>
+
+  </ion-grid>
+</ion-content>

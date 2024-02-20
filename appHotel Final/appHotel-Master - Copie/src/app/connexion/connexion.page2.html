@@ -1,0 +1,69 @@
+<ion-header translucent = "true" no-border>
+  <ion-toolbar color="primary">
+    <ion-title>Ibis Styles Vitam</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background" fullscreen="true">
+  <ion-grid id="mainGrid">
+    <ion-row id="rowMainGrid">
+      <ion-item>
+        <ion-input [(ngModel)]="code" text-center></ion-input>
+      </ion-item>
+    </ion-row>
+
+    <ion-row id="secondRowForSecondGrid">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <ion-button (click)="code1('1')">1</ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button (click)="code1('2')">2</ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button (click)="code1('3')">3</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+              <ion-button  (click)="code1('4')">4</ion-button>
+          </ion-col>
+          <ion-col size="4">
+              <ion-button  (click)="code1('5')">5</ion-button>
+          </ion-col>
+          <ion-col size="4">
+              <ion-button  (click)="code1('6')">6</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4">
+              <ion-button  (click)="code1('7')">7</ion-button>
+          </ion-col>
+          <ion-col size="4">
+              <ion-button  (click)="code1('8')">8</ion-button>
+          </ion-col>
+          <ion-col size="4">
+                <ion-button  (click)="code1('9')">9</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="4">
+                <ion-button>#</ion-button>
+              </ion-col>
+  
+              <ion-col size="4">
+                <ion-button (click)="code1('0')">0</ion-button>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button (click)="deleteCode()">C</ion-button>
+              </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+    <ion-row id="rowConfirmConnection">
+      <ion-button id="confirmCode" shape="round" expand="full" name="check-circle" (click)="seConnecter()">Connexion</ion-button>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

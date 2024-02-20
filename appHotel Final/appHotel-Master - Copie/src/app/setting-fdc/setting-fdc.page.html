@@ -1,0 +1,84 @@
+<ion-header translucent="true" no-border>
+  <ion-toolbar color="primary">
+   
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="connecte/acceuil" *ngIf="utilisateur.is_gouvernante"></ion-back-button>
+      <ion-back-button defaultHref="connexion" *ngIf="utilisateur.is_gouvernante == false"></ion-back-button>
+   </ion-buttons>
+
+   <div id="headerContainer">
+      <div id="logoIbis"></div>
+      <div id="headerTitle">Gestion des femmes de chambres</div>
+      <div id="logoMigros"></div>    
+  </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <!-- fab placed to the (vertical) center and end -->
+   <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="AlertAddFDC()">
+      <ion-fab-button >
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  <ion-list>
+      
+
+<ion-list lines="none" >
+    <ion-radio-group [(ngModel)]="disponible"  (ionChange)="checkMaster($event)" >
+      <ion-list-header>
+        <ion-label>Femmes de chambres :</ion-label>
+      </ion-list-header>
+  
+      <ion-item>
+        <ion-label>Disponible </ion-label>
+        <ion-radio  slot="start" value="dispo" checked  ></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Non disponible</ion-label>
+        <ion-radio  slot="start" value="nondispo"  ></ion-radio>
+      </ion-item>
+  
+    </ion-radio-group>
+  </ion-list>
+
+   
+  
+ <!-- Sliding item with expandable options on both sides -->
+<!-- <ion-item-sliding  *ngFor="let femme of ListFM;let k=index;  ">
+  <ion-item-options side="start">
+    <ion-item-option color="danger" (click)="AlertDelete(femme)" expandable>
+      {{boutonActiverDesactiver}}
+    </ion-item-option>
+  </ion-item-options>
+
+  <ion-item>
+      <ion-avatar item-start>
+          <img src="../../assets/fdm/fdm{{femme.id_FM}}.png">
+        </ion-avatar>
+    <ion-label>{{femme.nom + ' ' + femme.prenom}}</ion-label>
+  </ion-item>
+
+  <ion-item-options side="end">
+    <ion-item-option color="tertiary" (click)="AlertUpdate(femme)" expandable>
+     Modifier
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>-->
+
+<ion-item-sliding  *ngFor="let femme of ListFM;let k=index;">
+    <ion-item-options side="start">
+      <ion-item-option (click)="AlertUpdate(femme)" expandable>Modifier</ion-item-option>
+      <ion-item-option color="danger" (click)="AlertDelete(femme)" expandable> {{boutonActiverDesactiver}}</ion-item-option>
+    </ion-item-options>
+    <ion-item>
+        <ion-avatar item-start>
+            <img src="../../assets/fdm/fdm{{femme.id_FM}}.png">
+          </ion-avatar>
+      <ion-label>{{femme.nom + ' ' + femme.prenom}}</ion-label>
+    </ion-item>
+  </ion-item-sliding>
+  </ion-list>
+</ion-content>

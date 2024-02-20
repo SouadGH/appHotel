@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Liste des options : chambre {{chambre.room_num}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row *ngIf="chambre.is_litBebe == true">
+            <img class="imgOptionRoom" src="../../../assets/icon/baby_bed.png">
+            <span> Lit bébé</span>
+        </ion-row>
+        <hr>
+        <ion-row *ngIf="chambre.is_porteOuverte == true">
+            <img class="imgOptionRoom" src="../../../assets/icon/door-opened.png">
+            <span>Porte ouverte</span>
+        </ion-row>
+        <hr>
+        <ion-row *ngIf="chambre.is_porteFermee == true">
+            <img class="imgOptionRoom" src="../../../assets/icon/door_closed.ico">
+            <span>Porte fermée</span>
+        </ion-row>
+        <hr>
+        <ion-row *ngIf="chambre.is_canapeOuvert == true">
+            <img class="imgOptionRoom" src="../../../assets/icon/couch_open.png">
+            <span>Canapé ouvert</span>
+        </ion-row>
+        <hr>
+        <ion-row *ngIf="chambre.is_canapeFerme == true">
+            <img class="imgOptionRoom" src="../../../assets/icon/couch_closed.png">
+            <span>Canapé fermé</span>
+        </ion-row>
+        <hr>
+        <ion-row *ngIf="chambre.is_litItalienne == true">
+            <img class="imgOptionRoom" src="../../../assets/icon/italian_bed.jpg">
+            <span>Lit à l'italienne</span>
+        </ion-row>
+        <hr>
+        <ion-row *ngIf="chambre.is_cadeauChocolat == true">
+            <img class="imgOptionRoom" src="../../../assets/icon/chocolate.png">
+            <span>Cadeau Chocolat</span>
+        </ion-row>
+        <hr>
+        <ion-row *ngIf="chambre.is_cadeauChampagne == true">
+            <img class="imgOptionRoom" src="../../../assets/icon/champagne.png">
+            <span>Cadeau champagne</span>
+        </ion-row>
+        <hr>
+        <ion-row *ngIf="chambre.is_cadeauFleur == true">
+            <img class="imgOptionRoom" src="../../../assets/icon/fleurs.png">
+            <span>Cadeau fleurs</span>
+        </ion-row>
+        <hr>
+
+    </ion-grid>
+</ion-content>

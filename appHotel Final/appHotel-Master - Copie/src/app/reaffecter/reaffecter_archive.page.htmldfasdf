@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Devdactic Eisenhower
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content forceOverscroll="false">
+
+
+  <ion-grid>
+ 
+    <ion-row align-items-center>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="fixed">New Todo:</ion-label>
+          <ion-input [(ngModel)]="todo.value"></ion-input>
+        </ion-item>
+ 
+      </ion-col>
+ 
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>Quadrant:</ion-label>
+          <ion-select [(ngModel)]="selectedQuadrant">
+            <ion-select-option value="q1">Theresa</ion-select-option>
+            <ion-select-option value="q2">Loren</ion-select-option>
+            <ion-select-option value="q3">Melania</ion-select-option>
+            <ion-select-option value="q4">Brigitte</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+ 
+    </ion-row>
+ 
+    <ion-button expand="block" fill="outline" (click)="addTodo()">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Add Todo
+    </ion-button>
+ 
+    <ion-grid>
+        <div class="q-header">Chambres non attribuees</div>
+          <ion-row>
+                  <ion-item-group dragula="bag" [(dragulaModel)]="q5" lines="none">
+                    <ion-button *ngFor="let item of q5" >
+                      {{ item.value}}
+                    </ion-button>
+                  </ion-item-group>
+          </ion-row>
+          
+    </ion-grid>
+  
+    <ion-row no-padding class="matrix">
+      <ion-col size="6" *ngFor="let femme of ListFM" class="q1">
+        <div class="q-header">{{femme.prenom}} {{femme.nom}}</div>
+        <ion-item-group dragula="bag"   lines="none"  >
+          <!--  [dragulaModel]="getRoomsAffected(femme.id_FM)"  [dragulaModel]="getRoomsAffected(femme.id_FM)" (dragulaModelChange)="getRoomsAffected(femme.id_FM,$event)" 
+         <ion-buttonbag
+                  *ngFor="let chambre of ((femme.etage=='2')? etage2 :(femme.etage=='3')? etage3 :etage4) ;let k=index;"
+                  id="notification-button"
+                  [color]="(chambre.Etat =='LIB-Prp') ? 'success' :  (chambre.Etat =='LIB-Sal') ? 'danger' : 
+                                          (chambre.Etat =='OCC-Sal') ? 'warning' :    (chambre.Etat =='OCC-Prp') ? 'success' :'medium'"
+                 > {{chambre.room_num}}
+          </ion-button>-->
+
+            <ion-button  *ngFor="let chambre of (getRoomsAffected(femme.id_FM))"             
+                  id="notification-button"
+                  [color]="(chambre.Etat =='LIB-Prp') ? 'success' :  (chambre.Etat =='LIB-Sal') ? 'danger' : 
+                                          (chambre.Etat =='OCC-Sal') ? 'warning' :    (chambre.Etat =='OCC-Prp') ? 'success' :'medium'"
+                 > {{chambre.room_num}}
+          </ion-button>
+
+          <!--<ion-button *ngFor="let item of q1" [color]="item.color" >
+            {{ item.value }}
+          </ion-button>-->
+        </ion-item-group>
+      </ion-col>
+ 
+      <ion-col size="6" class="q2">
+        <div class="q-header">Loren</div>
+        <ion-item-group dragula="bag" [(dragulaModel)]="q2" lines="none">
+          <ion-button *ngFor="let item of q2" [color]="item.color" >
+            {{ item.value }}
+          </ion-button>
+        </ion-item-group>
+      </ion-col>
+ 
+      <ion-col size="6" class="q3">
+        <div class="q-header">Melania</div>
+        <ion-item-group dragula="bag" [(dragulaModel)]="q3" lines="none">
+          <ion-button *ngFor="let item of q3" [color]="item.color" >
+            {{ item.value }}
+          </ion-button>
+        </ion-item-group>
+      </ion-col>
+ 
+      <ion-col size="6" class="q4">
+        <div class="q-header">Brigitte</div>
+        <ion-item-group dragula="bag" [(dragulaModel)]="q4" lines="none">
+          <ion-button *ngFor="let item of q4" [color]="item.color">
+            {{ item.value }}
+          </ion-button>
+        </ion-item-group>
+      </ion-col>
+
+  
+
+    </ion-row>
+  </ion-grid>
+ 
+  <ion-row class="delete-area" align-items-center justify-content-center>
+    <ion-button (click)="printSelections()">Save
+      <ion-icon slot="start" name="jet"></ion-icon>
+    </ion-button>
+  </ion-row>
+ 
+</ion-content>

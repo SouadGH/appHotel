@@ -1,0 +1,318 @@
+<ion-header translucent="true" no-border>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="connecte/acceuil" *ngIf="utilisateur.is_gouvernante"></ion-back-button>
+      <ion-back-button defaultHref="connexion" *ngIf="utilisateur.is_gouvernante == false"></ion-back-button>
+    </ion-buttons>
+
+    <div id="headerContainer">
+      <div id="logoIbis"></div>
+      <div id="headerTitle">Dispatch</div>
+      <div id="logoMigros"></div>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--
+  <ion-fab right top>
+    <button ion-button clear icon-only (click)="(GoReaffecter())" *ngIf="utilisateur.is_gouvernante==true">
+      <ion-icon class="add-icon" name="remove"></ion-icon>
+    </button>
+  </ion-fab>
+  
+  <ion-button shape="round" slot="start" (click)="(GoReaffecter())" *ngIf="utilisateur.is_gouvernante==true">
+    <ion-icon name="brush"></ion-icon>
+    Réaffecter
+  </ion-button>
+  <ion-button shape="round" slot="end" (click)="rafraichir()">
+    <ion-icon name="sync"></ion-icon>
+    Rafraîchir
+  </ion-button>-->
+
+  <ion-item-divider>
+    <ion-button slot="start" shape="round" (click)="(GoReaffecter())" *ngIf="utilisateur.is_gouvernante==true">
+      <ion-icon icon-only name="brush"></ion-icon>
+      Réaffectation
+    </ion-button>
+    <ion-button slot="end" shape="round" (click)="rafraichir()">
+      <ion-icon icon-only name="sync"></ion-icon>
+      Rafraîchir
+    </ion-button>
+  </ion-item-divider>
+  <!--
+  <ion-grid>  
+  
+    <ion-row *ngFor="let sector of roomsBySector;let i=index;">
+        <ion-col size="6" class="q2">
+            <div class="q-header">{{sector.femmeMenage.nom}} {{sector.femmeMenage.prenom}}</div>
+            <ion-item-group >
+              <ion-button *ngFor="let item of sector.rooms" 
+              [color]="(item.etat =='LIB-Prp') ? 'success' :  (item.etat =='LIB-Sal') ? 'danger' : 
+                       (item.etat =='OCC-Sal') ? 'warning' :    (item.etat =='OCC-Prp') ? 'success' :'medium'"
+              (click)="presentActionSheet_Etat(chambre)"                
+              >
+                {{ item.room_num }}
+              </ion-button>
+            </ion-item-group>
+          </ion-col>
+    </ion-row> 
+    
+  </ion-grid>-->
+
+  <ion-card *ngFor="let femme of  roomsBySector;let i=index;">
+    <ion-card-header>
+      <ion-item>
+        <!--
+            <ion-avatar slot="start"  [hidden]="(exist_image1(femme.femmeMenage.code)=='false') ? true:false"  >           
+                <img src='{{path_base}}{{femme.femmeMenage.code}}.jpg'   />                
+            </ion-avatar>-->
+
+        <ion-avatar slot="start">
+          <img src="(exist_image(femme.femmeMenage.code)" />
+        </ion-avatar>
+
+
+        <!--
+            <ion-avatar slot="start">
+              <img [src]="path" [hidden]="!exist_image_path" />
+              <img src="../../assets/images/none.jpg" [hidden]="exist_image_path"/>
+              <ion-col col-6 *ngFor="let cin of photos_downloaded; let id= index">
+                  <ion-card class="block">
+                    <img [src]=photos_downloaded[id] *ngIf="cin" />
+                  </ion-card>
+                </ion-col>
+            </ion-avatar>-->
+        <ion-label>{{femme.femmeMenage.nom}} {{femme.femmeMenage.prenom}} (Secteur : {{femme.femmeMenage.secteur}})
+          (Etage : {{femme.femmeMenage.etage}}) </ion-label>
+        <!-- affichage chart bar pour chaque FDC   barCanvas
+            <canvas  #barCanvas{femme.secteur} ></canvas>-->
+      </ion-item>
+
+
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-grid>
+        <ion-row>
+          <ion-item-group>
+            <!-- Repartition par FDC-->
+            <ion-button *ngFor="let chambre of femme.rooms" (click)="presentActionSheet(chambre)" [color]="
+                 (chambre.etat == 'LIB-Prp' || 
+                  chambre.etat == 'LIB-Prp-Checked' ||                 
+                  chambre.etat == 'LIB-Prp-Priority' ||
+                  chambre.etat == 'LIB-Prp-Priority-Checked' ||
+                  chambre.etat == 'LIB-Prp-ISSUE' ||
+                  chambre.etat == 'LIB-Prp-ISSUE-Checked' ||
+                  chambre.etat == 'LIB-Prp-ISSUE-Priority' ||
+                  chambre.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+ 
+                  chambre.etat == 'OCC-Prp' || 
+                  chambre.etat == 'OCC-Prp-Checked' ||
+                  chambre.etat == 'OCC-Prp-ISSUE'||
+                  chambre.etat == 'OCC-Prp-ISSUE-Checked' ||
+                  chambre.etat == 'OCC-Prp-Priority' ||
+                  chambre.etat == 'OCC-Prp-Priority-Checked' ||
+                  chambre.etat == 'OCC-Prp-ISSUE-Priority' ||
+                  chambre.etat == 'OCC-Prp-ISSUE-Priority-Checked ') ? 'success' :  
+                  
+                 (chambre.etat == 'LIB-Sal' ||
+                  chambre.etat == 'LIB-Sal-Checked' ||
+                  chambre.etat == 'LIB-Sal-Priority' ||
+                  chambre.etat == 'LIB-Sal-Priority-Checked' ||
+                  chambre.etat == 'LIB-Sal-ISSUE' ||
+                  chambre.etat == 'LIB-Sal-ISSUE-Checked' ||
+                  chambre.etat == 'LIB-Sal-ISSUE-Priority' ||
+                  chambre.etat == 'LIB-Sal-ISSUE-Priority-Checked') ? 'danger' : 
+ 
+                 (chambre.etat == 'OCC-Sal' ||
+                  chambre.etat == 'OCC-Sal-Checked' ||
+                  chambre.etat == 'OCC-Sal-Priority' ||
+                  chambre.etat == 'OCC-Sal-Priority-Checked' ||
+                  chambre.etat == 'OCC-Sal-ISSUE' ||
+                  chambre.etat == 'OCC-Sal-ISSUE-Checked' ||
+                  chambre.etat == 'OCC-Sal-ISSUE-Priority' ||
+                  chambre.etat == 'OCC-Sal-ISSUE-Priority-Checked') ? 'warning' : 
+ 
+                 'medium'" [ngClass]="
+                    chambre.etat == 'LIB-Prp-ISSUE' ||
+                    chambre.etat == 'LIB-Prp-ISSUE-Checked' || 
+                    chambre.etat == 'OCC-Prp-ISSUE' ||
+                    chambre.etat == 'OCC-Prp-ISSUE-Checked' ||
+                    chambre.etat == 'LIB-Sal-ISSUE' ||
+                    chambre.etat == 'LIB-Sal-ISSUE-Checked' ||
+                    chambre.etat == 'OCC-Sal-ISSUE' ||
+                    chambre.etat == 'OCC-Sal-ISSUE-Checked' ||
+ 
+                    chambre.etat == 'LIB-Prp-ISSUE-Priority' ||
+                    chambre.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                    chambre.etat == 'OCC-Prp-ISSUE-Priority' ||
+                    chambre.etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                    chambre.etat == 'LIB-Sal-ISSUE-Priority' ||
+                    chambre.etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                    chambre.etat == 'OCC-Sal-ISSUE-Priority' ||
+                    chambre.etat == 'OCC-Sal-ISSUE-Priority-Checked' ||
+ 
+                    chambre.etat == 'HS-Sal-ISSUE' ||
+                    chambre.etat == 'HS-Sal-ISSUE-Checked' ||
+                    chambre.etat == 'HS-Sal-ISSUE-Priority' ||
+                    chambre.etat == 'HS-Sal-ISSUE-Priority-Checked' ? 'pulse-button' : 'secondary'
+                   ">
+              {{chambre.room_num}}
+
+              <ion-icon *ngIf="
+                           chambre.etat == 'LIB-Prp-Priority' ||
+                           chambre.etat == 'OCC-Prp-Priority'  ||
+                           chambre.etat == 'LIB-Sal-Priority' ||
+                           chambre.etat == 'OCC-Sal-Priority'||
+ 
+                           chambre.etat == 'HS-Sal-Priority' || 
+                           chambre.etat == 'HS-Sal-ISSUE-Priority' ||
+ 
+                           chambre.etat == 'LIB-Prp-ISSUE-Priority' ||
+                           chambre.etat == 'OCC-Prp-ISSUE-Priority' ||
+                           chambre.etat == 'LIB-Sal-ISSUE-Priority' ||
+                           chambre.etat == 'OCC-Sal-ISSUE-Priority' ||
+ 
+                           chambre.etat == 'HS-Sal-Priority-Checked' ||
+                           chambre.etat == 'LIB-Prp-Priority-Checked' ||
+                           chambre.etat == 'OCC-Prp-Priority-Checked' ||
+                           chambre.etat == 'LIB-Sal-Priority-Checked' ||
+                           chambre.etat == 'OCC-Sal-Priority-Checked' ||
+ 
+                           chambre.etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+                           chambre.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+                           chambre.etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+                           chambre.etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+                           chambre.etat == 'OCC-Sal-ISSUE-Priority-Checked'
+                           " name="star"></ion-icon>
+
+
+              <ion-icon *ngIf="
+             chambre.etat == 'LIB-Prp-Checked' ||
+             chambre.etat == 'OCC-Prp-Checked'  ||
+             chambre.etat == 'LIB-Sal-Checked' ||
+             chambre.etat == 'OCC-Sal-Checked' ||
+             chambre.etat == 'HS-Sal-Checked' || 
+ 
+             chambre.etat == 'HS-Sal-Priority-Checked' ||
+             chambre.etat == 'LIB-Prp-Priority-Checked' ||
+             chambre.etat == 'OCC-Prp-Priority-Checked' ||
+             chambre.etat == 'LIB-Sal-Priority-Checked' ||
+             chambre.etat == 'OCC-Sal-Priority-Checked' ||
+ 
+             chambre.etat == 'HS-Sal-ISSUE-Checked' ||
+             chambre.etat == 'LIB-Prp-ISSUE-Checked' ||
+             chambre.etat == 'OCC-Prp-ISSUE-Checked' ||
+             chambre.etat == 'LIB-Sal-ISSUE-Checked' ||
+             chambre.etat == 'OCC-Sal-ISSUE-Checked' ||
+ 
+             chambre.etat == 'HS-Sal-ISSUE-Priority-Checked' ||
+             chambre.etat == 'LIB-Prp-ISSUE-Priority-Checked' ||
+             chambre.etat == 'OCC-Prp-ISSUE-Priority-Checked' ||
+             chambre.etat == 'LIB-Sal-ISSUE-Priority-Checked' ||
+             chambre.etat == 'OCC-Sal-ISSUE-Priority-Checked'
+             " name="done-all"></ion-icon>
+            </ion-button>
+          </ion-item-group>
+        </ion-row>
+      </ion-grid>
+
+
+    </ion-card-content>
+  </ion-card>
+  <!-- 
+  <ion-card *ngFor="let femme of ListFM">
+    <ion-card-header>
+        <ion-item>
+            <ion-avatar slot="start">
+              <img [src]="path" [hidden]="!exist_image_path" />
+              <img src="../../assets/images/none.jpg" [hidden]="exist_image_path"/>
+              <ion-col col-6 *ngFor="let cin of photos_downloaded; let id= index">
+                  <ion-card class="block">
+                    <img [src]=photos_downloaded[id] *ngIf="cin" />
+                  </ion-card>
+                </ion-col>
+            </ion-avatar>
+            <ion-label>{{femme.prenom}} {{femme.nom}} (Secteur : {{ femme.secteur }}) (Etage : {{ femme.etage }}) </ion-label>
+              
+            <canvas  #barCanvas{femme.secteur}  ></canvas>
+          </ion-item>
+      
+          
+    </ion-card-header>
+
+    <ion-card-content>
+
+        <ion-grid>
+            <ion-row>
+              <ion-item-group>
+              
+                 <ion-button
+                 *ngFor="let chambre of ((femme.secteur=='1')? secteur1 : (femme.secteur=='2')? secteur2 :(femme.secteur=='3')? secteur3 :(femme.secteur=='4')? secteur4 :secteur5) ;let k=index;"
+                 id="notification-button"
+                 [color]="(chambre.etat =='LIB-Prp') ? 'success' :  (chambre.etat =='LIB-Sal') ? 'danger' : 
+                                         (chambre.etat =='OCC-Sal') ? 'warning' :    (chambre.etat =='OCC-Prp') ? 'success' :'medium'"
+                 (click)="presentActionSheet_Etat(chambre)"> {{chambre.room_num}}
+               </ion-button>
+           
+              </ion-item-group>
+    
+            </ion-row>
+          </ion-grid>
+
+       
+    </ion-card-content>
+  </ion-card>-->
+
+
+
+
+
+
+
+
+
+
+
+  <!--
+  <button ion-button
+  style="font-weight: bold; width:3em; height:2em; float:right;margin-right: 4em; background-color:rgb(25, 204, 198);"
+  icon-only round (click)="openCamera()">
+  <ion-icon round style="font-size:1.5em;" name="cloud-upload"></ion-icon>
+</button>-->
+
+  <!-- upload image patrice-->
+  <ion-list>
+    <ion-item *ngFor="let img of images; index as pos" text-wrap>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="img.path"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        {{ img.name }}
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="startUpload(img)">
+        <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <!-- Fin upload image patrice-->
+
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button fill="clear" expand="full" color="light" (click)="selectImage()">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Select Image
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

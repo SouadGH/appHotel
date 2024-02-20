@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ utilisateur.prenom }} {{ utilisateur.nom }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <p>Gouvernante : {{ utilisateur.is_gouvernante}}</p>
+    <p>Réception : {{ utilisateur.is_reception }}</p>
+    <p>Femme de chambre : {{ utilisateur.is_femme_chambre }}</p>
+  </div>
+</ion-content>
